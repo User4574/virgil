@@ -1,26 +1,33 @@
 require './lib/virgil'
-include Virgil
+include Virgil::Tags
 
-puts Tag.doctype {
+puts doctype {
   "html"
 }
 
-puts Tag.html {
-  Tag.head {
-    Tag.title {
+puts comment {
+  "this is neat"
+}
+
+puts html {
+  head {
+    title {
       "My Virgil site"
     }
   } +
-  Tag.body {
-    Tag.h1 {
+  body {
+    h1 {
       "My Virgil site"
     } +
-    Tag.p({:class => "italic"}) {
+    p({:class => "italic"}) {
       "some content"
     } +
-    Tag.img({:src => "img.jpg"}) +
-    Tag.a({"href" => "/"}) {
+    img({:src => "img.jpg"}) +
+    a({"href" => "/"}) {
       "A link home"
+    } +
+    map {
+      area {}
     }
   }
 }
