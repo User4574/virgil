@@ -15,11 +15,11 @@ puts Tag.html {
     Tag.h1 {
       "My Virgil site"
     } +
-    Tag.p ({:class => "italic"}) {
+    Tag.p({:class => "italic"}) {
       "some content"
     } +
-    Tag.img ({:src => "img.jpg"}) +
-    Tag.a ({"href" => "/"}) {
+    Tag.img({:src => "img.jpg"}) +
+    Tag.a({"href" => "/"}) {
       "A link home"
     }
   }
