@@ -26,6 +26,7 @@ puts html {
     a({"href" => "/"}) {
       "A link home"
     } +
+    input({"webkit-speech-recognition" => nil}) {} +
     map {
       area {}
     }

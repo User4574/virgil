@@ -7,25 +7,20 @@ module Virgil
       Tag::Comment.new(&Proc.new).to_s
     end
     def common(attrs = {})
-      Tag::Common.new(__callee__, attrs, &Proc.new).to_s
+      Utils::Generic.new(attrs, __callee__, &Proc.new).to_s
     end
     def common_single(attrs = {})
-      Tag::Common_Single.new(__callee__, attrs).to_s
+      Utils::GenericSingle.new(attrs, __callee__).to_s
     end
 
-    def map(attrs = {})
-      Tag::Map.new("map", attrs, &Proc.new).to_s
-    end
-
-    def head(attrs = {})
-      Tag::Head.new("head", attrs, &Proc.new).to_s
+    def html(attrs = {})
+      Tag::Html.new(attrs, &Proc.new).to_s
     end
 
     alias :a :common
     alias :b :common
     alias :br :common_single
     alias :blockquote :common
-    alias :body :common
     alias :center :common
     alias :code :common
     alias :h1 :common
@@ -35,9 +30,9 @@ module Virgil
     alias :h5 :common
     alias :h6 :common
     alias :hr :common_single
-    alias :html :common
     alias :i :common
     alias :img :common_single
+    alias :input :common_single
     alias :li :common
     alias :ol :common
     alias :p :common
@@ -89,7 +84,6 @@ module Virgil
 #   alias :header :common
 #   alias :hgroup :common
 #   alias :iframe :common
-#   alias :input :common
 #   alias :ins :common
 #   alias :kbd :common
 #   alias :keygen :common

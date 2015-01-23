@@ -21,42 +21,39 @@ module Virgil
       end
     end
 
-    class Common
-      def initialize(tag, attrs, &block)
-        @tag =  "<#{tag}" +
-                Utils.unfold(attrs) +
-                ">" +
-                self.instance_eval(&block) +
-                "</#{tag}>"
+    class Html < Utils::Generic
+      def head(attrs = {})
+        Head.new(attrs, &Proc.new).to_s
       end
-      def to_s
-        @tag
+      def body(attrs = {})
+        Body.new(attrs, &Proc.new).to_s
       end
-      def subtag(attrs = {})
-        Common.new(__callee__, attrs, &Proc.new).to_s
-      end
-      def subtagsingle(attrs = {})
-        Common_Single.new(__callee__, attrs).to_s
-      end
-    end
-    class Common_Single
-      def initialize(tag, attrs)
-        @tag =  "<#{tag}" +
-                Utils.unfold(attrs) +
-                ">"
-      end
-      def to_s
-        @tag
-      end
-    end
 
-    class Map < Common
-      alias :area :subtagsingle
-    end
+      class Body < Html
+        def map(attrs = {})
+          Map.new(attrs, &Proc.new).to_s
+        end
 
-    class Head < Common
-      alias :link :subtagsingle
-      alias :title :subtag
+        class Map < Utils::Generic
+          def area(attrs = {})
+            Area.new(attrs).to_s
+          end
+
+          class Area < Utils::GenericSingle ; end
+        end
+      end
+
+      class Head < Html
+        def link(attrs = {})
+          Link.new(attrs).to_s
+        end
+        class Link < Utils::GenericSingle ; end
+
+        def title(attrs = {})
+          Title.new(attrs, &Proc.new).to_s
+        end
+        class Title < Utils::Generic ; end
+      end
     end
   end
 end
